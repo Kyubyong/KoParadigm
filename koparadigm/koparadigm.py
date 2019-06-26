@@ -1,5 +1,6 @@
-from rules import *
 from collections import OrderedDict
+
+from koparadigm.rules import *
 
 
 class Paradigm(object):
@@ -23,6 +24,7 @@ class Paradigm(object):
                             forms = "N/A"
                         else:
                             forms = "/".join(forms)
+
                         ending2forms[ending] = forms
                 ret.append(ending2forms)
             return ret
