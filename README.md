@@ -14,23 +14,35 @@ Inflection of Korean verbs is notorisouly complicated. Typically, a Korean verb 
 
 ## Installation
 ```
-pip install Koparadigm
+pip install koparadigm
 ```
 
 ## Usage
 ```
-from koparadigm import Paradigm
-p = Paradigm()
+>>> from koparadigm import Paradigm
+>>> p = Paradigm()
 
-verb = "먹" # Note that you must drop the final ending 다
-paradigms = p(verb) # this returns list due to homographs
-for paradigm in paradigms:
-    print(paradigm)
->> OrderedDict([('는다', '먹는다'), ('는다고', '먹는다고'), ('는다나', '먹는다나'), ('는다네', '먹는다네'), ('는다더라', '먹는다더라'), ('는다느니', '먹는다느니'), ('는다마는',  '먹는다마는'), ('으라고', '먹으라고'), ('으락', '먹으락'), ('으랴', '먹으랴'), ('으러', '먹으러'), ('으려', '먹으려'), 
-('아야만', 'N/A'), ('아야지', 'N/A'), ('아요', 'N/A'), ...
+>>> verb = "곱" # Note that you must drop the final ending 다
+>>> paradigms = p(verb) # this returns list of lists
+>>> print(paradigms)
+[['동사', OrderedDict([('는다', '곱는다'), ('는다고', '곱는다고'), ('는다나', '곱는다나'), ('는다네', '곱는다네'), ('는다더라', '곱는다더라'), ('는다느니', '곱는다느니'), ('는다마는', '곱는다마는'), ('는다손', '곱는다손'), ('는담', '곱는담'), ('는답시고', '곱는답시고') ...
+['형용사', OrderedDict([('습네', '곱습네'), ('습늰다', '곱습늰다'), ('습니까', '곱습니까'), ('습니다', '곱습니다'), ('습디까', '곱습디까'), ('습디다', '곱습디다'), ('습딘다', '곱습딘다'), ('습지요', '곱습지요'), ('으나', '고우나') ...]]
+>>> for paradigm in paradigms:
+...     print("pos =", paradigm[0])
+...     for ending, form in paradigm[0].items():
+...         print("ending =", ending, "form =", form)
+...     print()
+pos = 동사
+ending = 는다 form = 곱는다
+ending = 는다고 form = 곱는다고
+ending = 는다나 form = 곱는다나
+...
 
-# The keys and values of the dictioary are endings and forms, respectively.
-# N/A denotes that the verb does NOT combine with the ending.
+pos = 형용사
+ending = 습네 form = 곱습네
+ending = 습늰다 form = 곱습늰다
+ending = 습니까 form = 곱습니까
+...
 
 ```
 ## References
