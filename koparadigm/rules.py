@@ -1,8 +1,9 @@
 import xlrd
 from jamo import h2j, j2h, hcj_to_jamo, is_hcj
 import re
+import os
 
-book = xlrd.open_workbook("paradigm.xlsx")
+book = xlrd.open_workbook(os.path.dirname(os.path.abspath(__file__)) + "/paradigm.xlsx")
 
 
 def verb2labels():
