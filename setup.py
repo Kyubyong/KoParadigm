@@ -9,8 +9,8 @@ REQUIRED_PACKAGES = [
 ]
 
 setuptools.setup(
-    name="KoParadigm",
-    version="0.9",
+    name="koparadigm",
+    version="0.9.1",
     author="Kyubyong Park",
     author_email="kbpark.linguist@gmail.com",
     description="Korean Inflectional Paradigm Generator",
@@ -20,7 +20,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Kyubyong/paradigm",
     packages=setuptools.find_packages(),
-    package_data={'KoParadigm': ['koparadigm/paradigm.xlsx']},
+    package_data={'koparadigm': ['koparadigm/paradigm.xlsx']},
     python_requires=">=3.6",
     include_package_data=True,
     classifiers=[
