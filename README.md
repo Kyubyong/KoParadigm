@@ -29,7 +29,7 @@ pip install koparadigm
 ['형용사', OrderedDict([('습네', '곱습네'), ('습늰다', '곱습늰다'), ('습니까', '곱습니까'), ('습니다', '곱습니다'), ('습디까', '곱습디까'), ('습디다', '곱습디다'), ('습딘다', '곱습딘다'), ('습지요', '곱습지요'), ('으나', '고우나') ...]]
 >>> for paradigm in paradigms:
 ...     print("pos =", paradigm[0])
-...     for ending, form in paradigm[0].items():
+...     for ending, form in paradigm[1].items():
 ...         print("ending =", ending, "form =", form)
 ...     print()
 pos = 동사
