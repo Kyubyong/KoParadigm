@@ -1,3 +1,7 @@
+[![image](https://img.shields.io/pypi/v/koparadigm.svg)](https://pypi.org/project/koparadigm/)
+[![image](https://img.shields.io/pypi/l/koparadigm.svg)](https://pypi.org/project/koparadigm/)
+[![image](https://img.shields.io/pypi/pyversions/koparadigm.svg)](https://pypi.org/project/koparadigm/)
+
 # KoParadigm: Korean Inflectional Paradigm Generator
 
 (Inflectional) paradigm means the set of all the inflected forms of a word. For example, English verb "look" has inflected forms like "look", "look-s", "look-ed", and "look-ing", as all of you know.
