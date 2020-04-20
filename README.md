@@ -1,7 +1,3 @@
-[![image](https://img.shields.io/pypi/v/koparadigm.svg)](https://pypi.org/project/koparadigm/)
-[![image](https://img.shields.io/pypi/l/koparadigm.svg)](https://pypi.org/project/koparadigm/)
-[![image](https://img.shields.io/pypi/pyversions/koparadigm.svg)](https://pypi.org/project/koparadigm/)
-
 # KoParadigm: Korean Inflectional Paradigm Generator
 
 (Inflectional) paradigm means the set of all the inflected forms of a word. For example, English verb "look" has inflected forms like "look", "look-s", "look-ed", and "look-ing", as all of you know.
@@ -23,29 +19,24 @@ pip install koparadigm
 
 ## Usage
 ```
->>> from koparadigm import Paradigm
+>>> from koparadigm import Paradigm, prettify
 >>> p = Paradigm()
-
 >>> verb = "곱" # Note that you must drop the final ending 다
->>> paradigms = p(verb) # this returns list of lists
+>>> paradigms = p.conjugate(verb) # this returns list of lists
 >>> print(paradigms)
-[['동사', OrderedDict([('는다', '곱는다'), ('는다고', '곱는다고'), ('는다나', '곱는다나'), ('는다네', '곱는다네'), ('는다더라', '곱는다더라'), ('는다느니', '곱는다느니'), ('는다마는', '곱는다마는'), ('는다손', '곱는다손'), ('는담', '곱는담'), ('는답시고', '곱는답시고') ...
-['형용사', OrderedDict([('습네', '곱습네'), ('습늰다', '곱습늰다'), ('습니까', '곱습니까'), ('습니다', '곱습니다'), ('습디까', '곱습디까'), ('습디다', '곱습디다'), ('습딘다', '곱습딘다'), ('습지요', '곱습지요'), ('으나', '고우나') ...]]
->>> for paradigm in paradigms:
-...     print("pos =", paradigm[0])
-...     for ending, form in paradigm[1].items():
-...         print("ending =", ending, "form =", form)
-...     print()
-pos = 동사
-ending = 는다 form = 곱는다
-ending = 는다고 form = 곱는다고
-ending = 는다나 form = 곱는다나
+[['Action Verb', [('거나', '곱거나'), ('거늘', '곱거늘'), ('거니', '곱거니') ...]]]
+>>> prettify(paradigms)
+POS = Action Verb
+• ending = 거나 form = 곱거나
+• ending = 거늘 form = 곱거늘
+• ending = 거니 form = 곱거니
 ...
-
-pos = 형용사
-ending = 습네 form = 곱습네
-ending = 습늰다 form = 곱습늰다
-ending = 습니까 form = 곱습니까
+==================== 2 ====================
+POS = Descriptive Verb
+• ending = 거나 form = 곱거나
+• ending = 거늘 form = 곱거늘
+• ending = 거니 form = 곱거니
+• ending = 거니와 form = 곱거니와
 ...
 
 ```
