@@ -1,4 +1,6 @@
-# KoParadigm: Korean Inflectional Paradigm Generator
+# KoParadigm: A Korean Conjugation Paradigm Generator
+
+This is the offical repo for our paper: [KoParadigm: A Korean Conjugation Paradigm Generator](https://arxiv.org/abs/2004.13221)
 
 (Inflectional) paradigm means the set of all the inflected forms of a word. For example, English verb "look" has inflected forms like "look", "look-s", "look-ed", and "look-ing", as all of you know.
  Paradigms are widely used in corpus linguistics or search engines.
@@ -44,12 +46,10 @@ POS = Descriptive Verb
 If you use our software for research, please cite:
 
 ```
-@misc{KoParadigm2019,
+@article{park2020KoParadigm,
   author = {Park, Kyubyong },
-  title = {KoParadigm},
-  year = {2019},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/Kyubyong/paradigm}}
+  title={KoParadigm: A Korean Conjugation Paradigm Generator},
+  journal={arXiv preprint arXiv:2004.13221},
+  year={2020}
 }
 ```
