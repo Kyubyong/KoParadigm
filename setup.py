@@ -4,13 +4,13 @@ with open("README.md", mode="r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 REQUIRED_PACKAGES = [
-    'jamo',
-    'xlrd',
+    'jamo>=0.4.1',
+    'xlrd==1.2.0',
 ]
 
 setuptools.setup(
     name="koparadigm",
-    version="0.9.9",
+    version="0.10.0",
     author="Kyubyong Park",
     author_email="kbpark.linguist@gmail.com",
     description="Korean Conjugation Paradigm Generator",
