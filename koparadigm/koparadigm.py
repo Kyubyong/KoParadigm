@@ -1,63 +1,58 @@
-import xlrd
+import openpyxl
 from jamo import h2j, j2h, hcj_to_jamo, is_hcj
 import re
 import os
+from collections import defaultdict
 
-RESOURCE = xlrd.open_workbook(os.path.dirname(os.path.abspath(__file__)) + "/koparadigm.xlsx")
+RESOURCE_PATH = os.path.dirname(os.path.abspath(__file__)) + "/koparadigm.xlsx"
+RESOURCE = openpyxl.load_workbook(filename=RESOURCE_PATH, read_only=True)
+
 
 class Paradigm(object):
     def __init__(self):
         self.verb2verb_classes = self.make_verb2verb_classes()
         self.ending_class2endings = self.make_ending_class2endings()
         self.verb_class2rules = self.make_verb_class2rules()
-        
 
     def make_verb2verb_classes(self):
-        verb2verb_classes = dict() # e.g., {"곱": [1,2]}
+        verb2verb_classes = defaultdict(list)  # e.g., {"곱": [1,2]}
 
-        sh = RESOURCE.sheet_by_name("Verbs")
-        for rx in range(1, sh.nrows):
-            verb = sh.row(rx)[1].value
-            verb_class = int(sh.row(rx)[2].value)
-            if verb in verb2verb_classes:
-                verb2verb_classes[verb].append(verb_class)
-            else:
-                verb2verb_classes[verb] = [verb_class]
+        sh = RESOURCE["Verbs"]
+        for verb, verb_class in sh.iter_rows(
+            min_col=2, max_col=3, min_row=2, values_only=True
+        ):
+            verb2verb_classes[verb].append(verb_class)
         return verb2verb_classes
 
 
     def make_ending_class2endings(self):
-        ending_class2endings = dict()  # e.g., {1: ["어야", "어서]}
+        ending_class2endings = defaultdict(list)  # e.g., {1: ["어야", "어서]}
 
-        sh = RESOURCE.sheet_by_name("Endings")
-        for rx in range(1, sh.nrows):
-            ending = sh.row(rx)[1].value
-            ending_class = int(sh.row(rx)[2].value)
-            if ending_class in ending_class2endings:
-                ending_class2endings[ending_class].append(ending)
-            else:
-                ending_class2endings[ending_class] = [ending]
+        sh = RESOURCE["Endings"]
+        for ending, ending_class in sh.iter_rows(
+            min_col=2, max_col=3, min_row=2, values_only=True
+        ):
+            ending_class2endings[ending_class].append(ending)
         return ending_class2endings
 
 
     def make_verb_class2rules(self):
-        verb_class2rules = dict()
-        sh = RESOURCE.sheet_by_name("Template")
+        verb_class2rules = defaultdict(list)
+        sh = RESOURCE["Template"]
 
-        ending_classes = sh.row(0)[2:]
-        for rx in range(2, sh.nrows):
-            verb_class = int(sh.row(rx)[0].value)
-            for i, ending_class in enumerate(ending_classes, start=2):
-                ending_class = int(ending_class.value)
-                rule = sh.row(rx)[i].value
-                if rule != "":
-                    rule = rule[1:-1] # (...)
-                rule = (ending_class, rule)
+        ending_classes = list(
+            next(sh.iter_rows(min_row=1, max_row=1, min_col=3, values_only=True))
+        )
 
-                if verb_class in verb_class2rules:
-                    verb_class2rules[verb_class].append(rule)
+        for row in sh.iter_rows(min_row=3, values_only=True):
+            verb_class = row[0]
+            for ending_class, rule in zip(ending_classes, row[2:]):
+                if rule is not None:
+                    rule = rule[1:-1]  # ( ... )
                 else:
-                    verb_class2rules[verb_class] = [rule]
+                    rule = ""
+                rule = (ending_class, rule)
+                verb_class2rules[verb_class].append(rule)
 
         return verb_class2rules
 

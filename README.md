@@ -12,7 +12,7 @@ Inflection of Korean verbs is notorisouly complicated. Typically, a Korean verb 
 ## Dependencies
 * python >=3.6
 * jamo >=0.4.1
-* xlrd == 1.2.0
+* openpyxl >= 3.0.10
 
 ## Installation
 ```

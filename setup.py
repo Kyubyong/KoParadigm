@@ -5,12 +5,12 @@ with open("README.md", mode="r", encoding="utf-8") as fh:
 
 REQUIRED_PACKAGES = [
     'jamo>=0.4.1',
-    'xlrd==1.2.0',
+    'openpyxl>=3.0.10',
 ]
 
 setuptools.setup(
     name="koparadigm",
-    version="0.10.0",
+    version="0.11.0",
     author="Kyubyong Park",
     author_email="kbpark.linguist@gmail.com",
     description="Korean Conjugation Paradigm Generator",
