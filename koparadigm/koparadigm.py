@@ -2,6 +2,7 @@ import xlrd
 from jamo import h2j, j2h, hcj_to_jamo, is_hcj
 import re
 import os
+from collections import defaultdict
 
 RESOURCE = xlrd.open_workbook(os.path.dirname(os.path.abspath(__file__)) + "/koparadigm.xlsx")
 
@@ -13,35 +14,29 @@ class Paradigm(object):
         
 
     def make_verb2verb_classes(self):
-        verb2verb_classes = dict() # e.g., {"곱": [1,2]}
+        verb2verb_classes = defaultdict(list) # e.g., {"곱": [1,2]}
 
         sh = RESOURCE.sheet_by_name("Verbs")
         for rx in range(1, sh.nrows):
             verb = sh.row(rx)[1].value
             verb_class = int(sh.row(rx)[2].value)
-            if verb in verb2verb_classes:
-                verb2verb_classes[verb].append(verb_class)
-            else:
-                verb2verb_classes[verb] = [verb_class]
+            verb2verb_classes[verb].append(verb_class)
         return verb2verb_classes
 
 
     def make_ending_class2endings(self):
-        ending_class2endings = dict()  # e.g., {1: ["어야", "어서]}
+        ending_class2endings = defaultdict(list)  # e.g., {1: ["어야", "어서]}
 
         sh = RESOURCE.sheet_by_name("Endings")
         for rx in range(1, sh.nrows):
             ending = sh.row(rx)[1].value
             ending_class = int(sh.row(rx)[2].value)
-            if ending_class in ending_class2endings:
-                ending_class2endings[ending_class].append(ending)
-            else:
-                ending_class2endings[ending_class] = [ending]
+            ending_class2endings[ending_class].append(ending)
         return ending_class2endings
 
 
     def make_verb_class2rules(self):
-        verb_class2rules = dict()
+        verb_class2rules = defaultdict(list)
         sh = RESOURCE.sheet_by_name("Template")
 
         ending_classes = sh.row(0)[2:]
@@ -53,11 +48,7 @@ class Paradigm(object):
                 if rule != "":
                     rule = rule[1:-1] # (...)
                 rule = (ending_class, rule)
-
-                if verb_class in verb_class2rules:
-                    verb_class2rules[verb_class].append(rule)
-                else:
-                    verb_class2rules[verb_class] = [rule]
+                verb_class2rules[verb_class].append(rule)
 
         return verb_class2rules
 
