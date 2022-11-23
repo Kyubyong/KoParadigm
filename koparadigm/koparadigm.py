@@ -173,6 +173,7 @@ class Paradigm(object):
             return paradigms
         else:
             print(f"{verb} is NOT found.")
+            return []
 
 
 def prettify(paradigms):
